@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Financeiro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração customizada do Tailwind (incluindo cores e fontes) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'card-bg': '#1C1C1C', /* Fundo do card principal */
+                        'main-bg': '#0D0D0D', /* Fundo da página */
+                        'dark-text': '#e0e0e0',
+                        'light-gray-text': '#a0a0a0',
+                        'accent-blue': '#4a90e2',
+                        'accent-green': '#50e3c2',
+                        'accent-pink': '#d0021b', /* Vermelho/Pink para 'Em Risco' e 'Vencimento' */
+                        'chart-orange': '#f5a623',
+                        'icon-bg': '#2a2a2a', /* Fundo do círculo do ícone */
+                        'cta-main': '#4a90e2', // Azul principal para o novo CTA
+                        'cta-hover-dark': '#3a79c2', // Hover mais escuro
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos customizados para simulação de ícones e gráficos */
+        body {
+            background-color: #0d0d0d;
+        }
+
+        /* Classes para simular os ícones usando emojis */
+        .icon-pdd::before { content: "💰"; } 
+        .icon-client::before { content: "🗓️"; }
+        .icon-debt::before { content: "👤"; }
+        .icon-due::before { content: "📈"; }
+
+        /* Estilos do SVG para os gráficos */
+        .chart-grid {
+            stroke: #333;
+            stroke-dasharray: 2,2;
+            opacity: 0.5;
+        }
+        .chart-label {
+            fill: #a0a0a0;
+            font-size: 0.7rem; /* Rótulos menores */
+        }
+        /* Ajuste do tamanho da fonte dos valores no topo, que parecem ser maiores */
+        .card-value {
+            font-size: 1.5rem; /* text-2xl (~24px) */
+            line-height: 2rem;
+        }
+    </style>
+</head>
+<body class="text-dark-text min-h-screen p-4 md:p-8 lg:p-12 font-sans">
+    <div class="max-w-6xl mx-auto space-y-8">
+
+        <!-- 1. HEADER - Informações do Cliente (Card Principal) -->
+        <div class="bg-card-bg rounded-xl p-6 flex flex-col lg:flex-row items-center justify-between shadow-xl">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-12 text-sm w-full lg:w-auto mb-4 lg:mb-0">
+                <div>
+                    <p class="text-light-gray-text font-medium text-xs md:text-sm">Nome do Cliente</p>
+                    <p class="font-semibold mt-1">Banco ABC Brasil</p>
+                </div>
+                <div>
+                    <p class="text-light-gray-text font-medium text-xs md:text-sm">Atividade</p>
+                    <p class="font-semibold mt-1">Bancária</p>
+                </div>
+                <div>
+                    <p class="text-light-gray-text font-medium text-xs md:text-sm">Situação de Crédito</p>
+                    <p class="font-semibold mt-1">21 de Jan de 2021</p>
+                </div>
+                <div>
+                    <p class="text-light-gray-text font-medium text-xs md:text-sm">Data da última atualização</p>
+                    <p class="font-semibold mt-1">10 de Outubro de 2025</p>
+                </div>
+            </div>
+            <button class="bg-white bg-opacity-10 text-white text-sm font-semibold py-2 px-6 rounded-lg hover:bg-opacity-20 transition-colors duration-200 w-full lg:w-auto mt-4 lg:mt-0 lg:ml-8 flex-shrink-0">
+                Atualizar
+            </button>
+        </div>
+
+        <!-- 2. SITUAÇÃO DE CRÉDITO + CARDS DE RESUMO -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+            <!-- Painel de Situação de Crédito (1/4 na tela grande) -->
+            <div class="lg:col-span-1 bg-card-bg rounded-xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center text-white text-lg font-semibold mb-6">
+                        <div class="flex items-center">
+                            <span class="mr-2 text-xl text-accent-blue font-light">›</span>
+                            Situação de crédito
+                        </div>
+                        <!-- O Botão "Ver Tabela" foi removido daqui -->
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="bg-accent-pink text-white px-4 py-2 rounded-lg text-base font-medium inline-block shadow-md">
+                        Em risco
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards de Resumo (3/4 na tela grande) -->
+            <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <!-- Card PDD -->
+                <div class="bg-card-bg rounded-xl p-4 pt-6 flex flex-col items-start shadow-xl border-b-[5px] border-chart-orange">
+                    <div class="bg-icon-bg p-2 rounded-full mb-3">
+                        <span class="icon-pdd text-xl leading-none"></span>
+                    </div>
+                    <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">PDD</p>
+                    <p class="text-white card-value font-bold">$100,000</p>
+                </div>
+                
+                <!-- Card Cliente Desde -->
+                <div class="bg-card-bg rounded-xl p-4 pt-6 flex flex-col items-start shadow-xl border-b-[5px] border-accent-green">
+                    <div class="bg-icon-bg p-2 rounded-full mb-3">
+                        <span class="icon-client text-xl leading-none"></span>
+                    </div>
+                    <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Cliente desde</p>
+                    <p class="text-white card-value font-bold text-accent-green">02/10/2025</p>
+                </div>
+                
+                <!-- Card Saldo Devedor -->
+                <div class="bg-card-bg rounded-xl p-4 pt-6 flex flex-col items-start shadow-xl border-b-[5px] border-accent-blue">
+                    <div class="bg-icon-bg p-2 rounded-full mb-3">
+                        <span class="icon-debt text-xl leading-none"></span>
+                    </div>
+                    <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Saldo devedor</p>
+                    <p class="text-white card-value font-bold text-accent-blue">$50,000</p>
+                </div>
+                
+                <!-- Card Vencimento -->
+                <div class="bg-card-bg rounded-xl p-4 pt-6 flex flex-col items-start shadow-xl border-b-[5px] border-accent-pink">
+                    <div class="bg-icon-bg p-2 rounded-full mb-3">
+                        <span class="icon-due text-xl leading-none"></span>
+                    </div>
+                    <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Vencimento</p>
+                    <p class="text-white card-value font-bold text-accent-pink">$500,000</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. GRÁFICOS DE LINHA -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Gráfico 1: Total Anual -->
+            <div class="bg-card-bg rounded-xl p-6 shadow-xl">
+                <h3 class="text-white text-lg font-semibold mb-6">Total anual</h3>
+                <div class="h-64 relative">
+                    <!-- Simulação do Gráfico SVG (Laranja) -->
+                    <svg class="w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
+                        <!-- Linhas de Grade -->
+                        <line x1="50" y1="200" x2="450" y2="200" class="chart-grid"></line>
+                        <line x1="50" y1="150" x2="450" y2="150" class="chart-grid"></line>
+                        <line x1="50" y1="100" x2="450" y2="100" class="chart-grid"></line>
+                        <line x1="50" y1="50" x2="450" y2="50" class="chart-grid"></line>
+                        <line x1="50" y1="0" x2="450" y2="0" class="chart-grid"></line>
+
+                        <!-- Rótulos Y -->
+                        <text x="30" y="205" text-anchor="end" class="chart-label">$0</text>
+                        <text x="30" y="155" text-anchor="end" class="chart-label">$10k</text>
+                        <text x="30" y="105" text-anchor="end" class="chart-label">$20k</text>
+                        <text x="30" y="55" text-anchor="end" class="chart-label">$30k</text>
+                        <text x="30" y="5" text-anchor="end" class="chart-label">$40k</text>
+
+                        <!-- Linha do Gráfico -->
+                        <polyline fill="none" stroke="url(#gradientOrange)" stroke-width="3"
+                                  points="80,180 150,140 220,100 290,40 360,160 430,110" />
+                        
+                        <!-- Gradiente para a linha (Laranja) -->
+                        <defs>
+                            <linearGradient id="gradientOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#f5a623" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#f5a623" stop-opacity="0.5" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Pontos de Dados -->
+                        <circle cx="80" cy="180" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="150" cy="140" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="220" cy="100" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="290" cy="40" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="360" cy="160" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="430" cy="110" r="5" fill="#f5a623" stroke="#1C1C1C" stroke-width="2"/>
+
+                        <!-- Rótulos X -->
+                        <text x="80" y="230" text-anchor="middle" class="chart-label">2016</text>
+                        <text x="150" y="230" text-anchor="middle" class="chart-label">2017</text>
+                        <text x="220" y="230" text-anchor="middle" class="chart-label">2018</text>
+                        <text x="290" y="230" text-anchor="middle" class="chart-label">2019</text>
+                        <text x="360" y="230" text-anchor="middle" class="chart-label">2020</text>
+                        <text x="430" y="230" text-anchor="middle" class="chart-label">2021</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Variável Mensal -->
+            <div class="bg-card-bg rounded-xl p-6 shadow-xl">
+                <h3 class="text-white text-lg font-semibold mb-6">Variável Mensal</h3>
+                <div class="h-64 relative">
+                    <!-- Simulação do Gráfico SVG (Ciano/Verde) -->
+                    <svg class="w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
+                        <!-- Linhas de Grade -->
+                        <line x1="50" y1="200" x2="450" y2="200" class="chart-grid"></line>
+                        <line x1="50" y1="150" x2="450" y2="150" class="chart-grid"></line>
+                        <line x1="50" y1="100" x2="450" y2="100" class="chart-grid"></line>
+                        <line x1="50" y1="50" x2="450" y2="50" class="chart-grid"></line>
+                        <line x1="50" y1="0" x2="450" y2="0" class="chart-grid"></line>
+
+                        <!-- Rótulos Y -->
+                        <text x="30" y="205" text-anchor="end" class="chart-label">$0</text>
+                        <text x="30" y="155" text-anchor="end" class="chart-label">$10k</text>
+                        <text x="30" y="105" text-anchor="end" class="chart-label">$20k</text>
+                        <text x="30" y="55" text-anchor="end" class="chart-label">$30k</text>
+                        <text x="30" y="5" text-anchor="end" class="chart-label">$40k</text>
+
+                        <!-- Linha do Gráfico -->
+                        <polyline fill="none" stroke="url(#gradientBlue)" stroke-width="3"
+                                  points="80,180 150,150 220,100 290,110 360,180 430,90" />
+                        
+                        <!-- Gradiente para a linha (Ciano/Verde) -->
+                        <defs>
+                            <linearGradient id="gradientBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#50e3c2" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#50e3c2" stop-opacity="0.5" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Pontos de Dados -->
+                        <circle cx="80" cy="180" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="150" cy="150" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="220" cy="100" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="290" cy="110" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="360" cy="180" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        <circle cx="430" cy="90" r="5" fill="#50e3c2" stroke="#1C1C1C" stroke-width="2"/>
+                        
+                        <!-- Rótulos X -->
+                        <text x="80" y="230" text-anchor="middle" class="chart-label">2016</text>
+                        <text x="150" y="230" text-anchor="middle" class="chart-label">2017</text>
+                        <text x="220" y="230" text-anchor="middle" class="chart-label">2018</text>
+                        <text x="290" y="230" text-anchor="middle" class="chart-label">2019</text>
+                        <text x="360" y="230" text-anchor="middle" class="chart-label">2020</text>
+                        <text x="430" y="230" text-anchor="middle" class="chart-label">2021</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. CTA DE DESTAQUE NO FINAL DA PÁGINA -->
+        <div class="mt-12 pt-6 flex justify-center border-t border-card-bg/50">
+             <button id="verTabelaBtn" class="bg-cta-main text-white text-lg font-bold py-3 px-10 rounded-xl shadow-2xl hover:bg-cta-hover-dark transition-colors duration-200 uppercase tracking-wider w-full sm:w-auto">
+                Ver Tabela
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Script para abrir a nova aba com a tabela -->
+    <script>
+        document.getElementById('verTabelaBtn').addEventListener('click', function() {
+            window.open('tabela_detalhes.html', '_blank');
+        });
+    </script>
+</body>
+</html>
