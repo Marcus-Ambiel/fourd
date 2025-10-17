@@ -12,9 +12,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'card-bg': '#5C5C68', /* Fundo do card principal */
+                        'card-bg': '#5C5C8', /* Fundo do card principal */
                         'main-bg': '#0D0D0D', /* Fundo da página */
-                        'dark-text': '#e0e0e0',
+                        'dark-text': '#ee0e0',
                         'light-gray-text': '#a0a0a0',
                         'accent-blue': '#4a90e2',
                         'accent-green': '#50e3c2',
@@ -84,7 +84,7 @@ body {
                     <p class="font-semibold mt-1">10 de Outubro de 2025</p>
                 </div>
             </div>
-            <button class="bg-white bg-opacity-10 text-white text-sm font-semibold py-2 px-6 rounded-lg hover:bg-opacity-20 transition-colors duration-200 w-full lg:w-auto mt-4 lg:mt-0 lg:ml-8 flex-shrink-0">
+            <button class="bg-black bg-opacity-10 text-black text-sm font-semibold py-2 px-6 rounded-lg hover:bg-opacity-20 transition-colors duration-200 w-full lg:w-auto mt-4 lg:mt-0 lg:ml-8 flex-shrink-0">
                 Atualizar
             </button>
         </div>
@@ -95,12 +95,11 @@ body {
             <!-- Painel de Situação de Crédito (1/4 na tela grande) -->
             <div class="lg:col-span-1 bg-card-bg rounded-xl p-6 shadow-xl flex flex-col justify-between">
                 <div>
-                    <div class="flex items-center text-white text-lg font-semibold mb-6">
+                    <div class="flex items-center text-black text-lg font-semibold mb-6">
                         <div class="flex items-center">
                             <span class="mr-2 text-xl text-accent-blue font-light">›</span>
                             Situação de crédito
                         </div>
-                        <!-- O Botão "Ver Tabela" foi removido daqui -->
                     </div>
                 </div>
                 <div class="mt-4">
@@ -119,7 +118,7 @@ body {
                         <span class="icon-pdd text-xl leading-none"></span>
                     </div>
                     <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">PDD</p>
-                    <p class="text-white card-value font-bold">$100,000</p>
+                    <p class="text-black card-value font-bold">$100,000</p>
                 </div>
                 
                 <!-- Card Cliente Desde -->
@@ -128,7 +127,7 @@ body {
                         <span class="icon-client text-xl leading-none"></span>
                     </div>
                     <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Cliente desde</p>
-                    <p class="text-white card-value font-bold text-accent-green">02/10/2025</p>
+                    <p class="text-black card-value font-bold text-accent-green">02/10/2025</p>
                 </div>
                 
                 <!-- Card Saldo Devedor -->
@@ -137,7 +136,7 @@ body {
                         <span class="icon-debt text-xl leading-none"></span>
                     </div>
                     <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Saldo devedor</p>
-                    <p class="text-white card-value font-bold text-accent-blue">$50,000</p>
+                    <p class="text-black card-value font-bold text-accent-blue">$50,000</p>
                 </div>
                 
                 <!-- Card Vencimento -->
@@ -146,7 +145,7 @@ body {
                         <span class="icon-due text-xl leading-none"></span>
                     </div>
                     <p class="text-light-gray-text text-xs mb-1 uppercase font-medium">Vencimento</p>
-                    <p class="text-white card-value font-bold text-accent-pink">$500,000</p>
+                    <p class="text-black card-value font-bold text-accent-pink">$500,000</p>
                 </div>
             </div>
         </div>
@@ -156,7 +155,7 @@ body {
             
             <!-- Gráfico 1: Total Anual -->
             <div class="bg-card-bg rounded-xl p-6 shadow-xl">
-                <h3 class="text-white text-lg font-semibold mb-6">Total anual</h3>
+                <h3 class="text-black text-lg font-semibold mb-6">Total anual</h3>
                 <div class="h-64 relative">
                     <!-- Simulação do Gráfico SVG (Laranja) -->
                     <svg class="w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
@@ -207,7 +206,7 @@ body {
 
             <!-- Gráfico 2: Variável Mensal -->
             <div class="bg-card-bg rounded-xl p-6 shadow-xl">
-                <h3 class="text-white text-lg font-semibold mb-6">Variável Mensal</h3>
+                <h3 class="text-black text-lg font-semibold mb-6">Variável Mensal</h3>
                 <div class="h-64 relative">
                     <!-- Simulação do Gráfico SVG (Ciano/Verde) -->
                     <svg class="w-full h-full" viewBox="0 0 500 250" preserveAspectRatio="none">
